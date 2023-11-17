@@ -1,11 +1,18 @@
 package com.nikulaja.snookerscore
 
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
 import java.time.Instant
+import java.util.UUID
 
-data class Game(
+@Entity
+class Game(
+    @Id
+    val id: UUID,
     val player1Name: String,
     val player2Name: String,
+    val ongoing: Boolean,
     var player1Score: Int = 0,
     var player2Score: Int = 0,
-    val timestamp: Instant = Instant.now()
+    var timestamp: Instant = Instant.now(),
 )
