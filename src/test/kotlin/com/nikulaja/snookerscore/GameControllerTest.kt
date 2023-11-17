@@ -37,7 +37,7 @@ class GameControllerTest(@Autowired val mockMvc: MockMvc) {
         mockMvc.perform(
             post("/api/games")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(json)
+                .content(json),
         )
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.player1Name").value(player1Name))
@@ -45,10 +45,12 @@ class GameControllerTest(@Autowired val mockMvc: MockMvc) {
 
         verify(exactly = 1) { gameRepository.save(any()) }
         verify {
-            gameRepository.save(withArg {
-                assertTrue(player1Name == it.player1Name)
-                assertTrue(player2Name == it.player2Name)
-            })
+            gameRepository.save(
+                withArg {
+                    assertTrue(player1Name == it.player1Name)
+                    assertTrue(player2Name == it.player2Name)
+                },
+            )
         }
     }
 
@@ -64,7 +66,7 @@ class GameControllerTest(@Autowired val mockMvc: MockMvc) {
         mockMvc.perform(
             post("/api/games")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(json)
+                .content(json),
         )
             .andExpect(status().isBadRequest())
     }
@@ -80,7 +82,7 @@ class GameControllerTest(@Autowired val mockMvc: MockMvc) {
         mockMvc.perform(
             post("/api/games")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(json)
+                .content(json),
         )
             .andExpect(status().isBadRequest())
     }

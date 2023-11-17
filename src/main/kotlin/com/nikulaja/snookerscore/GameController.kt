@@ -3,7 +3,12 @@ package com.nikulaja.snookerscore
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
@@ -11,7 +16,10 @@ import java.util.*
 class GameController(private val repository: GameRepository) {
 
     @PostMapping("/games")
-    fun startGame(@Valid @RequestBody newGameRequest: NewGameRequest): ResponseEntity<Game> {
+    fun startGame(
+        @Valid @RequestBody
+        newGameRequest: NewGameRequest,
+    ): ResponseEntity<Game> {
         val game = newGameRequest.toGame()
         repository.save(game)
         return ResponseEntity.ok(game)
@@ -37,7 +45,7 @@ data class NewGameRequest(
     @field:NotBlank
     val player1Name: String,
     @field:NotBlank
-    val player2Name: String
+    val player2Name: String,
 ) {
     fun toGame(): Game {
         return Game(

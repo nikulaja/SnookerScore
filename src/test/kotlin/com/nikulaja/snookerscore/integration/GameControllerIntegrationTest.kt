@@ -23,7 +23,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPat
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import javax.sql.DataSource
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
@@ -66,7 +65,7 @@ class GameControllerIntegrationTest {
         val responseBody = mockMvc.perform(
             post("/api/games")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsString(newGameRequest))
+                .content(mapper.writeValueAsString(newGameRequest)),
         )
             .andExpect(status().isOk)
             .andExpect(jsonPath("$.player1Name", equalTo(newGameRequest.player1Name)))
