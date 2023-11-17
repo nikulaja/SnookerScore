@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<div  xmlns:th="http://www.w3.org/1999/xhtml">
+    <div>
+        Current time is <span th:text="${serverTime}"></span>
+    </div>
+    <div th:switch="${games!=null and !games.empty}">
+        <h2 th:case="false">No games yet!</h2>
+        <div th:case="true">
+            <h2>Games</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Player 1</th>
+                    <th>Player 2</th>
+                    <th>Ongoing</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="game : ${games}">
+                    <td th:text="${game.player1Name}"></td>
+                    <td th:text="${game.player2Name}"></td>
+                    <td th:text="${game.ongoing} ? 'yes' : 'ended'"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <form th:object="${newGameForm}" th:action="@{/games}" th:method="POST">
+            <div class="mb-3">
+                <label for="player1NameField" class="form-label">Player 1</label>
+                <input th:field="*{player1Name}" type="text" class="form-control" id="player1NameField">
+                <td th:if="${#fields.hasErrors('player1Name')}" th:errors="*{player1Name}">Name Error</td>
+            </div>
+            <div class="mb-3">
+                <label for="player2NameField" class="form-label">Player 2</label>
+                <input th:field="*{player2Name}" type="text" class="form-control" id="player2NameField">
+                <td th:if="${#fields.hasErrors('player2Name')}" th:errors="*{player2Name}">Name Error</td>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</html>

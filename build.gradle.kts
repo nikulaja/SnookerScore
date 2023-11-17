@@ -21,7 +21,9 @@ repositories {
 }
 
 dependencies {
+    // TODO https://reproducible-builds.org/
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:3.0.4")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("jakarta.validation:jakarta.validation-api:3.0.2")
