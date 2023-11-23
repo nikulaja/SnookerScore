@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class SnookerScore
 
 fun main(args: Array<String>) {
-    runApplication<SnookerScore>(*args)
+    runApplication<SnookerScore>(args = args)
 }

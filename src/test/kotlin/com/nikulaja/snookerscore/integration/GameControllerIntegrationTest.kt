@@ -73,6 +73,7 @@ class GameControllerIntegrationTest : IntegrationTestBase() {
             .andExpect(jsonPath("$.player1Name", equalTo("Player 1")))
             .andExpect(jsonPath("$.player2Name", equalTo("Player 2")))
             .andExpect(jsonPath("$.ongoing", equalTo(true)))
+        // TODO assert all fields, kotlin equals?
     }
 
     @Test
