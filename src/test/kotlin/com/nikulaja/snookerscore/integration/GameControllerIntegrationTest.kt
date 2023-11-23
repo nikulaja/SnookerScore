@@ -8,55 +8,24 @@ import com.nikulaja.snookerscore.GameRepository
 import com.nikulaja.snookerscore.NewGameRequest
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import javax.sql.DataSource
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-class GameControllerIntegrationTest {
+class GameControllerIntegrationTest : IntegrationTestBase() {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
 
     @Autowired
-    private lateinit var dataSource: DataSource
-
-    @Autowired
     private lateinit var gameRepository: GameRepository
 
     private val mapper = jacksonObjectMapper().registerModule(JavaTimeModule())
-
-    @BeforeAll
-    fun setUp() {
-        dataSource.connection.use { connection ->
-            connection.createStatement().use { statement ->
-                statement.execute("INSERT INTO game (player1name, player2name, ongoing, player1score, player2score, timestamp, id) VALUES ('Player 1', 'Player 2', true, 0, 0, '2022-01-01T00:00:00Z', '123e4567-e89b-12d3-a456-426655440000')")
-                statement.execute("INSERT INTO game (player1name, player2name, ongoing, player1score, player2score, timestamp, id) VALUES ('Player 3', 'Player 4', false, 5, 10, '2022-01-02T00:00:00Z', '234e5678-f90a-1b2c-d345-678901234567')")
-            }
-        }
-    }
-
-    @AfterAll
-    fun tearDown() {
-        dataSource.connection.use { connection ->
-            connection.createStatement().use { statement ->
-                statement.execute("DROP TABLE game")
-            }
-        }
-    }
 
     @Test
     fun `start game`() {
@@ -83,6 +52,8 @@ class GameControllerIntegrationTest {
 
     @Test
     fun `get games`() {
+        setTestData()
+
         mockMvc.perform(get("/api/games"))
             .andExpect(status().isOk)
             .andExpect(jsonPath("$[0].player1Name", equalTo("Player 1")))
@@ -95,6 +66,8 @@ class GameControllerIntegrationTest {
 
     @Test
     fun `get game by id`() {
+        setTestData()
+
         mockMvc.perform(get("/api/games/123e4567-e89b-12d3-a456-426655440000"))
             .andExpect(status().isOk)
             .andExpect(jsonPath("$.player1Name", equalTo("Player 1")))
