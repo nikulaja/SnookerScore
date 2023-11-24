@@ -1,7 +1,6 @@
 package com.nikulaja.snookerscore.integration
 
 import com.nikulaja.snookerscore.Game
-import com.nikulaja.snookerscore.GameController
 import com.nikulaja.snookerscore.NewGameForm
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.Matchers.notNullValue
@@ -19,9 +18,6 @@ class HtmlControllerIntegrationTest : IntegrationTestBase() {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
-
-    @Autowired
-    private lateinit var gameController: GameController
 
     @Test
     fun `test home page`() {
@@ -69,7 +65,7 @@ class HtmlControllerIntegrationTest : IntegrationTestBase() {
         newGameForm.player1Name = player1Name
         newGameForm.player2Name = player2Name
 
-        var modelanfview = mockMvc.perform(
+        mockMvc.perform(
             post("/games")
                 .param("player1Name", player1Name)
                 .param("player2Name", player2Name),
@@ -77,6 +73,5 @@ class HtmlControllerIntegrationTest : IntegrationTestBase() {
             .andExpect(status().isOk)
             .andExpect(model().attributeHasFieldErrors("newGameForm", "player1Name"))
             .andExpect(view().name("index"))
-            .andReturn().modelAndView
     }
 }

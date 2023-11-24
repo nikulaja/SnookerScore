@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.1.5"
     id("io.spring.dependency-management") version "1.1.0"
     id("com.diffplug.spotless") version "6.22.0"
+    id("io.gitlab.arturbosch.detekt") version("1.23.1")
     kotlin("jvm") version "1.9.0"
     kotlin("plugin.spring") version "1.8.0"
     kotlin("plugin.jpa") version "1.8.0"
@@ -41,6 +42,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("com.ninja-squad:springmockk:4.0.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.1")
 }
 
 allOpen {
@@ -68,4 +71,9 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlinGradle {
         ktlint(ktLintVersion)
     }
+}
+
+detekt {
+    config.setFrom(file("config/detekt/detekt.yml"))
+    buildUponDefaultConfig = true
 }
