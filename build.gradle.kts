@@ -4,13 +4,12 @@ plugins {
     id("org.springframework.boot") version "3.1.5"
     id("io.spring.dependency-management") version "1.1.0"
     id("com.diffplug.spotless") version "6.22.0"
-    id("io.gitlab.arturbosch.detekt") version("1.23.1")
-    kotlin("jvm") version "1.9.0"
+    id("io.gitlab.arturbosch.detekt") version("1.23.3")
+    alias(libs.plugins.kotlin.jvm)
     kotlin("plugin.spring") version "1.8.0"
     kotlin("plugin.jpa") version "1.8.0"
     kotlin("plugin.allopen") version "1.8.0"
     kotlin("kapt") version "1.8.0"
-
     application
 }
 

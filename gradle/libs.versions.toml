@@ -1,0 +1,20 @@
+[versions]
+spring = "3.1.5"
+kotlin = "1.9.10"
+
+[libraries]
+spring-web = { group = "org.springframework.boot", name = "spring-boot-starter-web", version.ref = "spring" }
+spring-thymeleaf =  { group = "org.springframework.boot", name = "spring-boot-starter-thymeleaf", version.ref = "spring" } # 3.0.4?
+spring-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation", version.ref = "spring" }
+spring-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa", version.ref = "spring" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version = "kotlin" }
+plugin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+plugin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring" }
+dependency-management = { id = "io.spring.dependency-management", version = "1.1.0" }
+spotless = { id = "com.diffplug.spotless", version = "6.22.0" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.1" }
