@@ -1,15 +1,15 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.5"
-    id("io.spring.dependency-management") version "1.1.0"
-    id("com.diffplug.spotless") version "6.22.0"
-    id("io.gitlab.arturbosch.detekt") version("1.23.3")
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.dependency.management)
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.detekt)
     alias(libs.plugins.kotlin.jvm)
-    kotlin("plugin.spring") version "1.8.0"
-    kotlin("plugin.jpa") version "1.8.0"
-    kotlin("plugin.allopen") version "1.8.0"
-    kotlin("kapt") version "1.8.0"
+    alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.kotlin.jpa)
+    alias(libs.plugins.kotlin.allopen)
+    alias(libs.plugins.kotlin.kapt)
     application
 }
 
@@ -22,10 +22,10 @@ repositories {
 
 dependencies {
     // TODO https://reproducible-builds.org/
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:3.0.4")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation(libs.spring.web)
+    implementation(libs.spring.thymeleaf)
+    implementation(libs.spring.validation)
+    implementation(libs.spring.data.jpa)
     implementation("jakarta.validation:jakarta.validation-api:3.0.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
