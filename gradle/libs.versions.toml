@@ -1,14 +1,29 @@
 [versions]
 spring = "3.1.5"
 kotlin = "1.9.10"
+jakarta = "3.0.2"
+jackson = "2.16.0"
+h2 = "2.2.224"
+junit = "5.10.1"
+springmockk = "4.0.0"
+detekt = "1.23.1"
 
 [libraries]
 spring-web = { group = "org.springframework.boot", name = "spring-boot-starter-web", version.ref = "spring" }
-spring-thymeleaf =  { group = "org.springframework.boot", name = "spring-boot-starter-thymeleaf", version.ref = "spring" } # 3.0.4?
+spring-thymeleaf =  { group = "org.springframework.boot", name = "spring-boot-starter-thymeleaf", version.ref = "spring" }
 spring-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation", version.ref = "spring" }
 spring-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa", version.ref = "spring" }
-jakarta = { group = "jakarta.validation", name = "jakarta.validation-api", version = "3.0.2" }
-
+spring-devtools = { group = "org.springframework.boot", name = "spring-boot-devtools", version.ref = "spring" }
+spring-configuration-processor = { group = "org.springframework.boot", name = "spring-boot-configuration-processor", version.ref = "spring" }
+spring-test = { group = "org.springframework.boot", name = "spring-boot-starter-test", version.ref = "spring" }
+jakarta = { group = "jakarta.validation", name = "jakarta.validation-api", version.ref = "jakarta" }
+jackson = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+h2 = { group = "com.h2database", name = "h2", version.ref = "h2" }
+springmockk = { group = "io.mockk", name = "mockk", version.ref = "springmockk" }
+junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit" }
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit" }
+detekt = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
